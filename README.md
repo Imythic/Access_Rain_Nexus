@@ -1,4 +1,4 @@
-# 💧 RainUSE Nexus — Rainwater Harvesting Prospecting Engine
+# 💧 Access Rain Nexus — Rainwater Harvesting Prospecting Engine
 
 A hackathon-ready automated prospecting dashboard for identifying high-value commercial buildings for rainwater harvesting systems across the continental US.
 
@@ -14,12 +14,25 @@ A hackathon-ready automated prospecting dashboard for identifying high-value com
 
 ---
 
-## 🚀 Quick Start (One Command)
+## 🚀 Quick Start
+
+### macOS/Linux
 
 ```bash
 chmod +x start.sh
 ./start.sh
 ```
+
+### Windows
+
+If using Git Bash, WSL, or similar:
+
+```bash
+chmod +x start.sh
+./start.sh
+```
+
+Alternatively, run the services manually as described in Manual Setup below.
 
 Then open: **http://localhost:3000**
 
@@ -29,10 +42,22 @@ Then open: **http://localhost:3000**
 
 ### 1. Python Backend
 
+#### macOS/Linux
+
 ```bash
 cd backend
 python3 -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
+source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+#### Windows
+
+```bash
+cd backend
+python -m venv .venv
+.venv\Scripts\activate
 pip install -r requirements.txt
 uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
@@ -50,9 +75,18 @@ Requires Go 1.21+. Download from https://go.dev/dl/
 
 ### 3. Frontend
 
+#### macOS/Linux
+
 ```bash
 cd frontend
 python3 -m http.server 3000
+```
+
+#### Windows
+
+```bash
+cd frontend
+python -m http.server 3000
 ```
 
 Open: http://localhost:3000
@@ -93,7 +127,7 @@ Viability Score =
 ## 🗃️ Project Structure
 
 ```
-rainuse-nexus/
+Access Rain-nexus/
 ├── backend/
 │   ├── main.py                 # FastAPI server
 │   ├── buildings_data.json     # 100 mock buildings
