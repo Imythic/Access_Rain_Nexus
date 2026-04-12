@@ -1,0 +1,40 @@
+{
+    'geometry': {
+        'location': {
+            'lat': 32.7766642,
+                'lng': -96.79698789999999
+        },
+        'viewport': {
+            'northeast': {
+                'lat': 33.02379205649777,
+                    'lng': -96.46371007987953
+            },
+            'southwest': {
+                'lat': 32.61321602232911,
+                    'lng': -97.00048203416956
+            }
+        }
+    },
+    'icon': 'https: //maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/geocode-71.png',
+        'icon_background_color': '#7B9EB0',
+            'icon_mask_base_uri': 'https: //maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet',
+                'name': 'Dallas',
+                    'photos': [
+        {
+                            'height': 1080,
+                            'html_attributions': [
+                                '<a href="https://maps.google.com/maps/contrib/115370175874173324428">Jogos Antigos Mobile</a>'
+            ],
+                            'photo_reference': 'AU_ZVEEQFEqjs_qiTZSh1mhy-Qj4oQspc9rM_SAK6MDYO_OORuePMY_aw0xLp5FvgW6tREqSzGIYmhUugOK9HSZ42j0Fnu-Vslngt5Ij_qszqfm4V7lvV6wS5l3bpg4FFXLMC8ArZ4Za-zcwJUgI6hi_mcIYAlHSLiJwq6k7dpjv7O-dW8_uaF029C3gQpVUUd9y9H1-2xR7EMVmW8IvOBUP3G8GuRC-jKIr5_HTf0BGkD4zjfo2hK-roiwpzMQw5UkYSlTJAAYe0iqzXN57oliDNgzpdGBV7Y-qU5K63pcJNrji2oITcQJKfjihpVzsZDtIJ4ZFNHgxsi14Kik4KDm2HW6NCr9pH1fSZDxEP1xF9wQVGX2ZjX4NJmU4Nuof2Gmf7oPkGFR-Svk_F3QcuD6eBUv2HAtE73KGjY9U9T21Q7S5MK9QREhVoXFPn-nmQPSZHpSP62bKqCojZ7KK8M11rtA3ymJoHkVMKR6LZ0pGa8bTF_aFRut6mJ5rRufz7ciO3miHZ5ka2kpgYp818OgW-yFVa54VSEi7TBQhrTXkjFx-F2KZbZRva-l1r-k40y2wmLPaXXaoOYBQPEY_uxKE419pi8UcxX4RN2qf39yG0tVYPYb5x6bkWjC3urjaOxOkm8vnZYJK',
+                            'width': 1958
+        }
+    ],
+                        'place_id': 'ChIJS5dFe_cZTIYRj2dH9qSb7Lk',
+                            'reference': 'ChIJS5dFe_cZTIYRj2dH9qSb7Lk',
+                                'scope': 'GOOGLE',
+                                    'types': [
+                                        'locality',
+                                        'political'
+    ],
+                                        'vicinity': 'Dallas'
+}
