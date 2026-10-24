@@ -1,5 +1,5 @@
 """
-RainUSE Nexus - Python FastAPI Backend
+AccessRain Nexus - Python FastAPI Backend
 Automated Rainwater Harvesting Prospecting Engine
 """
 
@@ -52,7 +52,7 @@ from dotenv import load_dotenv
 # # local_results = results["local_results"]
 # # print(local_results)
 
-app = FastAPI(title="RainUSE Nexus API", version="1.0.0")
+app = FastAPI(title="AccessRain Nexus API", version="1.0.0")
 
 # Allow all origins for hackathon demo
 app.add_middleware(
@@ -283,7 +283,7 @@ def serve_frontend():
     index_path = os.path.join(frontend_path, "index.html")
     if os.path.exists(index_path):
         return FileResponse(index_path)
-    return {"message": "RainUSE Nexus API running. Open frontend/index.html in browser."}
+    return {"message": "AccessRain Nexus API running. Open frontend/index.html in browser."}
 
 
 if __name__ == "__main__":

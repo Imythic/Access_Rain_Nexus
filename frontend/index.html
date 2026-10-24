@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AccessRain Nexus — Rainwater Prospecting Engine</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- ── NAV BAR ── -->
+  <header class="navbar">
+    <div class="navbar-brand">
+      <span class="brand-icon">💧</span>
+      <span class="brand-name">AccessRain <span class="brand-accent">Nexus</span></span>
+      <span class="brand-tag">Prospecting Engine v1.0</span>
+    </div>
+    <div class="navbar-center">
+      <div class="live-badge">
+        <span class="pulse-dot"></span>
+        <span>LIVE PIPELINE</span>
+      </div>
+    </div>
+    <div class="navbar-stats" id="nav-stats">
+      <div class="nav-stat"><span id="nav-total">—</span><small>Buildings</small></div>
+      <div class="nav-stat"><span id="nav-savings">—</span><small>Annual Savings</small></div>
+      <div class="nav-stat"><span id="nav-hot">—</span><small>Hot Leads</small></div>
+    </div>
+  </header>
+
+  <!-- ── CONTROL BAR ── -->
+  <div class="control-bar">
+    <div class="control-group">
+      <label>State</label>
+      <select id="filter-state" class="ctrl-select">
+        <option value="">All States</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label>Min Roof Size <span id="roof-val" class="val-badge">0 sqft</span></label>
+      <input type="range" id="filter-roof" min="0" max="1000000" step="50000" value="0" class="ctrl-range">
+    </div>
+    <div class="control-group">
+      <label>Min Viability <span id="viab-val" class="val-badge">0</span></label>
+      <input type="range" id="filter-viab" min="0" max="100" step="5" value="0" class="ctrl-range">
+    </div>
+    <div class="control-toggles">
+      <label class="toggle-wrap">
+        <input type="checkbox" id="filter-cooling" />
+        <span class="toggle-slider"></span>
+        <span>Cooling Towers Only</span>
+      </label>
+      <label class="toggle-wrap">
+        <input type="checkbox" id="filter-esg" />
+        <span class="toggle-slider"></span>
+        <span>High ESG Only</span>
+      </label>
+    </div>
+    <div class="control-group search-group">
+      <label>Search</label>
+      <input type="text" id="search-input" class="ctrl-input" placeholder="Building name or city..." />
+    </div>
+    <button class="btn-apply" id="apply-filters">Apply Filters</button>
+    <button class="btn-reset" id="reset-filters">Reset</button>
+  </div>
+
+  <!-- ── MAIN LAYOUT ── -->
+  <div class="main-layout">
+
+    <!-- ── LEFT PANEL ── -->
+    <aside class="left-panel">
+      <div class="panel-section">
+        <div class="panel-header">
+          <span class="panel-icon">🏆</span>
+          <h3>Top Opportunities</h3>
+          <span class="count-chip" id="top-count">10</span>
+        </div>
+        <div id="top-list" class="top-list">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <div class="panel-header">
+          <span class="panel-icon">📊</span>
+          <h3>Metrics</h3>
+        </div>
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-val" id="m-savings">—</div>
+            <div class="metric-label">Total Annual Savings</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-val" id="m-water">—</div>
+            <div class="metric-label">Water Potential (gal/yr)</div>
+          </div>
+          <div class="metric-card accent-green">
+            <div class="metric-val" id="m-viab">—</div>
+            <div class="metric-label">Avg Viability Score</div>
+          </div>
+          <div class="metric-card accent-blue">
+            <div class="metric-val" id="m-high">—</div>
+            <div class="metric-label">High-Value Buildings</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <div class="panel-header">
+          <span class="panel-icon">🌍</span>
+          <h3>Best States</h3>
+        </div>
+        <div id="state-rankings" class="state-rankings">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <div class="panel-section logistics-section">
+        <div class="panel-header">
+          <span class="panel-icon">🚚</span>
+          <h3>Logistics Engine</h3>
+          <span class="go-badge">Go</span>
+        </div>
+        <button class="btn-logistics" id="load-logistics">Load Deployment Plan</button>
+        <div id="logistics-output" class="logistics-output hidden">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </aside>
+
+    <!-- ── MAP ── -->
+    <div class="map-container">
+      <div id="map"></div>
+      <div class="map-legend">
+        <div class="legend-item"><span class="dot green"></span> 70–100 Viability</div>
+        <div class="legend-item"><span class="dot yellow"></span> 40–69 Viability</div>
+        <div class="legend-item"><span class="dot red"></span> &lt;40 Viability</div>
+      </div>
+      <div class="map-counter">
+        <span id="visible-count">0</span> buildings shown
+      </div>
+    </div>
+
+    <!-- ── RIGHT PANEL ── -->
+    <aside class="right-panel">
+      <div class="panel-section">
+        <div class="panel-header">
+          <span class="panel-icon">💡</span>
+          <h3>Insights</h3>
+        </div>
+        <div id="insights-list" class="insights-list">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <div class="panel-header">
+          <span class="panel-icon">🔬</span>
+          <h3>CV Detection Pipeline</h3>
+        </div>
+        <div class="pipeline-viz">
+          <div class="pipe-step active">
+            <div class="pipe-icon">🛰️</div>
+            <div class="pipe-label">Satellite Imagery</div>
+            <div class="pipe-status">Simulated</div>
+          </div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-step active">
+            <div class="pipe-icon">🤖</div>
+            <div class="pipe-label">CV Detection</div>
+            <div class="pipe-status">Active</div>
+          </div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-step active">
+            <div class="pipe-icon">📐</div>
+            <div class="pipe-label">Roof Calc</div>
+            <div class="pipe-status">Complete</div>
+          </div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-step active">
+            <div class="pipe-icon">⚡</div>
+            <div class="pipe-label">Score Engine</div>
+            <div class="pipe-status">Live</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <div class="panel-header">
+          <span class="panel-icon">📈</span>
+          <h3>Score Distribution</h3>
+        </div>
+        <div id="score-chart" class="score-chart">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <div class="panel-header">
+          <span class="panel-icon">🔥</span>
+          <h3>Hot Leads</h3>
+        </div>
+        <div id="hot-leads" class="hot-leads-list">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ── BUILDING DETAIL DRAWER ── -->
+  <div id="detail-drawer" class="detail-drawer hidden">
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div class="drawer-panel">
+      <button class="drawer-close" id="drawer-close">✕</button>
+      <div id="drawer-content"></div>
+    </div>
+  </div>
+
+  <!-- ── TOAST NOTIFICATION ── -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

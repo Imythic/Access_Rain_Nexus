@@ -1,4 +1,4 @@
-# 💧 Access Rain Nexus — Rainwater Harvesting Prospecting Engine
+# 💧 AccessRain Nexus — Rainwater Harvesting Prospecting Engine
 
 A hackathon-ready automated prospecting dashboard for identifying high-value commercial buildings for rainwater harvesting systems across the continental US.
 
@@ -127,7 +127,7 @@ Viability Score =
 ## 🗃️ Project Structure
 
 ```
-Access Rain-nexus/
+AccessRain-nexus/
 ├── backend/
 │   ├── main.py                 # FastAPI server
 │   ├── buildings_data.json     # 100 mock buildings

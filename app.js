@@ -1,4 +1,4 @@
-/* ── RainUSE Nexus – Frontend Application ───────────────────────────────── */
+/* ── AccessRain Nexus – Frontend Application ───────────────────────────────── */
 
 const API_BASE = 'http://localhost:8000';
 const LOGISTICS_BASE = 'http://localhost:8001';

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ─────────────────────────────────────────────────────────────────
-#  RainUSE Nexus — Start All Services
+#  AccessRain Nexus — Start All Services
 # ─────────────────────────────────────────────────────────────────
 set -e
 
@@ -8,7 +8,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo ""
 echo "╔═══════════════════════════════════════════╗"
-echo "║       RainUSE Nexus — Startup             ║"
+echo "║       AccessRain Nexus — Startup             ║"
 echo "╚═══════════════════════════════════════════╝"
 echo ""
 

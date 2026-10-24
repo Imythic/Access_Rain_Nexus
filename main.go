@@ -287,7 +287,7 @@ func healthHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]string{
 		"status":  "ok",
-		"service": "RainUSE Nexus Logistics Engine",
+		"service": "AccessRain Nexus Logistics Engine",
 		"version": "1.0.0",
 	})
 }
@@ -309,7 +309,7 @@ func main() {
 	mux.HandleFunc("/logistics", logisticsHandler(apiURL))
 	mux.HandleFunc("/clusters", clusterHandler(apiURL))
 
-	log.Printf("🚀 RainUSE Nexus Logistics Engine running on :%s", port)
+	log.Printf("🚀 AccessRain Nexus Logistics Engine running on :%s", port)
 	log.Printf("   API URL: %s", apiURL)
 	log.Fatal(http.ListenAndServe(":"+port, mux))
 }
