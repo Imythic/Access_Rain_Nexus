@@ -1,6 +1,10 @@
 /* ── AccessRain Nexus – Frontend Application ───────────────────────────────── */
 
-const API_BASE = 'http://localhost:8000';
+// Static demo mode: reads frozen endpoint snapshots from data/ instead of a
+// live FastAPI backend. To run against the real backend locally, set
+// DEMO_MODE = false and start it per the README (uvicorn on :8000).
+const DEMO_MODE = true;
+const API_BASE = DEMO_MODE ? 'data' : 'http://localhost:8000';
 const LOGISTICS_BASE = 'http://localhost:8001';
 
 // ── STATE ──────────────────────────────────────────────────────────────────
@@ -36,10 +40,11 @@ function initMap() {
 async function loadData() {
   showMapLoading(true);
   try {
+    const ext = DEMO_MODE ? '.json' : '';
     const [buildingsRes, metricsRes, statesRes] = await Promise.all([
-      fetch(`${API_BASE}/buildings`),
-      fetch(`${API_BASE}/metrics`),
-      fetch(`${API_BASE}/states`)
+      fetch(`${API_BASE}/buildings${ext}`),
+      fetch(`${API_BASE}/metrics${ext}`),
+      fetch(`${API_BASE}/states${ext}`)
     ]);
 
     if (!buildingsRes.ok || !metricsRes.ok || !statesRes.ok) {

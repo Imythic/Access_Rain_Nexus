@@ -1,5 +1,7 @@
 # 💧 AccessRain Nexus — Rainwater Harvesting Prospecting Engine
 
+**Live demo:** https://accessrain-nexus.vercel.app *(static — 230 buildings scored once and frozen in `frontend/data/`, not served by the live FastAPI/Go backend below. Filters, the map, and the detail drawer are fully interactive; the logistics panel needs the Go service running locally.)*
+
 A hackathon-ready automated prospecting dashboard for identifying high-value commercial buildings for rainwater harvesting systems across the continental US.
 
 ---
